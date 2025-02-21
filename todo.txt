@@ -1,0 +1,2 @@
+[] Characters search component
+[] Filter component
