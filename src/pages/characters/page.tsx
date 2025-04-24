@@ -21,9 +21,7 @@ export function CharactersPage() {
 		origin: [],
 		species: [],
 	})
-	function getNestedValue(obj: any, path: string): any {
-		return path.split('.').reduce((acc, key) => acc?.[key], obj)
-	}
+
 
 	const [filteredCards, setFilteredCards] = useState<ICards[]>([])
 	const [currentFilter, setCurrentFilters] = useState<IFilterValue[]>([])
@@ -60,7 +58,7 @@ export function CharactersPage() {
 			return speciesFilter && statusFilter && genderFilter
 		})
 
-		console.log(arr)
+
 setFilteredCards(arr)
 		
 		}
@@ -84,7 +82,7 @@ setFilteredCards(arr)
 				<div className='character-main flex-auto'>
 					<Cards cards={paginated} />
 					<div className='w-full flex justify-center'>
-						<div className='flex gap-2 items-center'>
+						<div className='flex gap-2 items-center '>
 							<button className='pretty-btn'>{page - 2}</button>
 							<button className='pretty-btn'>{page - 1}</button>
 							<button className='pretty-btn'>{page}</button>
