@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+.characters-main {
+	display: flex;
+	justify-content: center;
+}
+.cards {
+	/* flex: 70%; */
+}
+.cards:first-child {
+	background-color: aliceblue;
+}
+.characters-filter {
+	display: none;
+	max-width: 250px;
+	margin-right: 50px;
+	/* width: max-content; */
+	/* flex: 80%; */
+}
+
+@media screen and (min-width: 900px) {
+	.characters-filter {
+		display: block;
+	}
+}

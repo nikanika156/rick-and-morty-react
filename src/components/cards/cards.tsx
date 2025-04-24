@@ -1,41 +1,36 @@
 import './cards.css'
-import { useState, useEffect } from 'react'
-import { IRickAndMorty } from '../../types/types'
-import getFilterTypes from '../../scripts/character-filters/get-filter-types'
+import { ICards } from '../../types/types'
 
-export function Cards() {
-	const [characters, setCharacters] = useState<IRickAndMorty[]>([])
+interface Props {
+	cards: ICards[]
+}
 
-	useEffect(() => {
-		fetch('https://rickandmortyapi.com/api/character?')
-			.then(response => response.json())
-			.then(data => {
-				setCharacters(data.results)
-			})
-	}, [])
-	console.log(getFilterTypes());
-	
-
+export function Cards({ cards }: Props) {
 	return (
 		<>
-
 			<div className='main'>
-				<div className='card-container'>
+				<div className='h-20 flex justify-between items-center'>
+					<select name='' id=''></select>
+				</div>
+				<div className='card-container py-10 border-t-stone-500 border-t-1'>
+					{cards?.map((card: ICards) => (
+						
+						<div className={``} key={card.id}>
+							<div className='card '>
+								<div className='image'>
+									<img src={card.image} alt={card.name+' Image'} />
+								</div>
 
-				{characters.map(card => (
-					<div className='card' key={card.id}>
-						<div className='image'>
-							<img src={card.image} alt='' />
+								<div className='description'>
+									<p className='card-species'>{card.species}</p>
+									<h1 className='card-name'>{card.name}</h1>
+									<p className='card-location' title={card?.origin.name}>
+										{card.origin.name}
+									</p>
+								</div>
+							</div>
 						</div>
-						<div className='description'>
-							<p className='card-species'>{card.species}</p>
-							<h1 className='card-name'>{card.name}</h1>
-							<p className='card-location' title={card.location.name}>
-								{card.location.name}
-							</p>
-						</div>
-					</div>
-				))}
+					))}
 				</div>
 			</div>
 		</>

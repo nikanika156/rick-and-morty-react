@@ -1,12 +1,26 @@
+@import 'tailwindcss';
 body{
   margin: 0;
-}
 
-.h-80{
+}
+/* .header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+
+} */
+/* .h-80{
   height: 80px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+} */
+.border-top{
+background-color:var(--color-gray-500) ;
+}
+.scrollbar{
+	scrollbar-width: thin;
 }
 
 :root {
@@ -22,4 +36,26 @@ body{
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+button {
+	box-sizing: border-box;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  /* padding: 0.6em 1.2em; */
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color:var(--color-stone-500);
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+button:hover {
+  background-color: var(--color-amber-500);
+	box-shadow: var(--color-amber-500) 0px 0px 3px;
+}
+button:focus,
+button:focus-visible {
+
+outline: none;
 }

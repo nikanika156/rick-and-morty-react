@@ -1,10 +1,11 @@
+@import 'tailwindcss';
 * {
 	box-sizing: border-box;
 }
 
 .main {
 	max-width: 950px;
-	display: flex;
+	width: 100%;
 }
 .card-container {
 	display: grid;
@@ -32,6 +33,7 @@
 	height: 25vw;
 	width: 25vw;
 }
+
 .description p,
 h1 {
 	text-overflow: ellipsis;
@@ -75,21 +77,16 @@ h1 {
 
 @media screen and (min-width: 900px) {
 	.card-container {
-		/* flex-flow: column; */
-		padding: 0rem;
-		/* grid-template-columns: 1fr 1fr 1fr; */
-		display: flex;
-		flex-wrap: wrap;
-
-		justify-content: space-between;
+		/* padding: 0rem; */
+		grid-template-columns: 1fr 1fr 1fr;
+		margin: 0;
 	}
 	.card {
-		display: flex;
 		flex-flow: column;
 		width: 175px;
+		margin: auto;
 	}
 	.image {
-		/* margin-right: 30px; */
 		margin: 0;
 	}
 	.image img {
@@ -100,6 +97,9 @@ h1 {
 
 @media screen and (min-width: 1200px) {
 	.card-container {
-		/* grid-template-columns: 1fr 1fr 1fr 1fr; */
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	.description {
+		width: 175px;
 	}
 }

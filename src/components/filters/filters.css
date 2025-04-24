@@ -1,17 +1,19 @@
-.main {
-	display: none;
-	/* max-width: 260px; */
+@import 'tailwindcss';
+
+.filters-main {
+	max-width: 260px;
 	min-width: 240px;
+	/* flex: 1 1 0%; */
+	/* width: max-content; */
 	/* width: 260px; */
+	width: 100%;
 }
 .header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	/* max-width: 260px; */
-	/* min-width: 200px; */
-	/* width: 260px; */
+
 }
 .header h1 {
 	font-size: 1.5rem;
@@ -27,8 +29,9 @@
 	height: 1rem;
 }
 
+
 @media screen and (min-width: 900px) {
 	.main {
-		display: block;
+		/* display: block; */
 	}
 }
