@@ -1,6 +1,6 @@
 // DataContext.tsx
 import { createContext, useContext } from 'react'
-import { IFilters, IFilterValue } from '../types/types'
+import {  IFilterValue } from '../types/types'
 type DataContextType = {
 	sendData: ({}:IFilterValue) => void
 }

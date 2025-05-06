@@ -1,11 +1,10 @@
 import './App.css'
-import { CharactersPage } from './pages/characters/page'
+import { CharactersPage } from './pages/characters/character-page'
 export function App() {
 	return (
 		<>
-			<div className=''>
+
 				<CharactersPage />
-			</div>
 		</>
 	)
 }

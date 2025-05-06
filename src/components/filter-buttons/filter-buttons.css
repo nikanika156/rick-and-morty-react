@@ -1,0 +1,13 @@
+/* .show-button {
+	animation: wiggle 0.5s ;
+}
+@keyframes wiggle {
+	from {
+    display: none;
+		transform: scaleX(0);
+	}
+	to {
+    display: block;
+		transform: scaleX(1);
+	}
+} */

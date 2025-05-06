@@ -1,7 +1,7 @@
-@import 'tailwindcss';
-body{
-  margin: 0;
+@import "tailwindcss/utilities";
 
+body {
+	margin: 0;
 }
 /* .header {
 	display: flex;
@@ -16,10 +16,10 @@ body{
 	align-items: center;
 	justify-content: space-between;
 } */
-.border-top{
-background-color:var(--color-gray-500) ;
+.border-top {
+	background-color: var(--color-gray-500);
 }
-.scrollbar{
+.scrollbar {
 	scrollbar-width: thin;
 }
 
@@ -31,6 +31,7 @@ background-color:var(--color-gray-500) ;
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
+	/* background-color: var(--color-neutral-00); */
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -38,24 +39,4 @@ background-color:var(--color-gray-500) ;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-button {
-	box-sizing: border-box;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  /* padding: 0.6em 1.2em; */
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color:var(--color-stone-500);
-  cursor: pointer;
-  transition: background-color 0.25s;
-}
-button:hover {
-  background-color: var(--color-amber-500);
-	box-shadow: var(--color-amber-500) 0px 0px 3px;
-}
-button:focus,
-button:focus-visible {
 
-outline: none;
-}

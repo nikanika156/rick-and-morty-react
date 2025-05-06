@@ -2,7 +2,7 @@ import { Check } from 'lucide-react'
 import './custom-checkbox.css'
 
 import { useDataContext } from '../../hooks/use-data-context'
-import { ICards, IFilters, IFilterValue } from '../../types/types'
+import { ICards, IFilterValue } from '../../types/types'
 
 interface customCheckboxProps {
 	name: string
@@ -20,7 +20,7 @@ export function CustomCheckbox({ name, htmlFor }: customCheckboxProps) {
 	}
 	return (
 		<>
-			<label htmlFor={`${name}-${htmlFor}`} className=' flex items-center'>
+			<label htmlFor={`${name}-${htmlFor}`} className=' flex items-center min-w-0'>
 				<input
 					hidden
 					id={`${name}-${htmlFor}`}
@@ -33,8 +33,7 @@ export function CustomCheckbox({ name, htmlFor }: customCheckboxProps) {
 				<div className='custom-checkbox mr-2 flex items-center justify-center h-5 w-5 transition bg-stone-500 rounded' >
 					<Check size={15} strokeWidth={4} className='check-icon transition' />
 				</div>
-				{/* <span>{htmlFor}</span> */}
-				<span>{htmlFor}</span>
+				<span className='truncate'>{htmlFor}</span>
 			</label>
 		</>
 	)

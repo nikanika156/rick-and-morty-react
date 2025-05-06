@@ -38,7 +38,7 @@ export async function GetData() {
 		createFilter('Gender', [...new Set(results.map(x => x.gender))]),
 		createFilter('Species', [...new Set(results.map(x => x.species))]),
 		createFilter('Status', [...new Set(results.map(x => x.status))]),
-		// createFilter('Origin', [...new Set(results.map(x => x.origin.name))]),
+		createFilter('Origin', [...new Set(results.map(x => x.origin.name))]),
 	]
 
 	return { filter: filters, cards: results }
