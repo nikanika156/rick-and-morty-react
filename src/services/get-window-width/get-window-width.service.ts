@@ -1,5 +1,5 @@
 export const getWindowWidthService = () => {
-	if (window.innerWidth < 960 || window.outerWidth < 960) {
+	if (window.innerWidth < 900) {
 		return true
 	} else {
 		return false

@@ -59,6 +59,7 @@ export function CharactersPage() {
 		})
 		setPage(1)
 		setFilteredCards(arr)
+		// window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
 	useEffect(() => {
@@ -66,26 +67,22 @@ export function CharactersPage() {
 	}, [])
 	useEffect(() => {
 		filterCards()
+		// window.scrollTo({ top: 0, behavior: 'smooth' })
 	}, [filtersObj])
 	return (
 		<>
 			<div className=' flex'>
 				<DataContext.Provider value={{ sendData: handleFilterChange }}>
-					
 					<Filters filters={filtersAndCardArr!.filter} />
 					{/* <FiltersMobile filters={filtersAndCardArr!.filter} /> */}
 				</DataContext.Provider>
 
-				<div className='character-main max-[960px]:mx-10 min-[960px]:mr-10   flex-[3_1] flex flex-col items-center w-min'>
+				<div className='character-main max-[900px]:mx-10 min-[900px]:mr-10 flex-1 flex flex-col items-center w-min pb-40'>
 					<header className='w-full h-20 flex items-center justify-end'>
 						<HitsPerPage sendData={(e: number) => setHitsPerPage(e)} />
 					</header>
+					<PageBtns lastPage={PageCount} page={page} sendData={(page: number) => setPage(page)} />
 					<Cards cards={paginated} />
-					<PageBtns
-						lastPage={PageCount}
-						page={page}
-						sendData={(e: HTMLButtonElement) => setPage(parseInt(e.innerText))}
-					/>
 					{/* </div> */}
 				</div>
 			</div>

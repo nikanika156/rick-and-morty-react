@@ -1,18 +1,26 @@
-@import 'tailwindcss';
-
-.filters-main {
-	max-width: 260px;
-	min-width: 240px;
-	width: 100%;
-}
-.header {
+.mobile-view {
+	position: fixed;
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	/* box-sizing: border-box; */
+	padding-inline: 40px;
+	bottom: 0;
+	height: 90dvh;
 	width: 100%;
+	background-color: var(--color-neutral-800) 80%;
+	backdrop-filter: blur(3px);
 }
-
-.header h1 {
-	font-size: 1.5rem;
+.filter-is-visible {
 }
-
+/* 'fixed',
+	'h-[90dvh]',
+	'bg-black-900',
+	'w-[100%]',
+	'backdrop-blur-xl',
+	'bg-neutral-800/80',
+	'box-border',
+	'px-10',
+	'rounded-3xl',
+	'transition-transform',
+	'duration-350',
+	'bottom-0', */

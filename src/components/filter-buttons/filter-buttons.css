@@ -1,13 +1,20 @@
-/* .show-button {
-	animation: wiggle 0.5s ;
+/* .show-buttons {
+	animation: open-animation 0.5s normal;
+	width: 100%;
 }
-@keyframes wiggle {
+.filter-open-button {
+	flex:1;
+}
+.reset-button {
+	flex:1;
+}
+
+@keyframes open-animation {
 	from {
-    display: none;
-		transform: scaleX(0);
+		width: 130px;
+
 	}
 	to {
-    display: block;
-		transform: scaleX(1);
+		width: 100%;
 	}
 } */

@@ -5,47 +5,61 @@ interface Props {
 	showFilter: (isVisible: boolean) => void
 }
 export function FilterButtons({ showFilter }: Props) {
-	const buttonsContainer = useRef<HTMLDivElement>(null)
+	const filterFooter = useRef<HTMLDivElement>(null)
 	const [filterIsVisible, setFilterIsVisible] = useState(false)
+
 	// const filterOpenButton = useRef(null)
-	const button = 'flex items-center transition-colors duration-150 rounded-xl outline-0 py-4 px-11 text-overflow-hidden'
+	const button =
+		'flex items-center justify-center transition-all duration-500 rounded-xl outline-0 min-h-[55px] overflow-hidden min-w-30'
 
 	const handleFilterVisible = () => {
 		setFilterIsVisible(prev => !prev)
-		// console.log('');
 	}
-	const isVisible = ['h-20', 'bottom-0', 'w-full']
-	const isNotVisible = ['h-10', 'bottom-[5%]', 'w-[150px]', 'rounded-xl',]
+	const isVisible = ['w-full', 'px-3', 'p-3', 'gap-3']
+	// const isNotVisible = ['h-10', 'bottom-[5%]', 'w-[150px]', 'rounded-xl']
 	useEffect(() => {}, [])
 	useEffect(() => {
-		const resetbutton = buttonsContainer.current?.firstChild as HTMLButtonElement
-		const filterShowButton = buttonsContainer.current?.lastChild as HTMLButtonElement
-		const buttons = buttonsContainer.current?.children
-	// Object.entries(buttons)
-		
+		const resetButton = filterFooter.current?.firstChild as HTMLButtonElement
+		const filterOpenButton = filterFooter.current?.lastChild as HTMLButtonElement
+		// isVisible.forEach(x => filterFooter.current?.classList.toggle(x, filterIsVisible))
+		// filterFooter.current?.classList.toggle('w-full', filterIsVisible)
+		// filterFooter.current?.classList.toggle('w-[130px]', !filterIsVisible)
+
+		// resetButton.classList.toggle('w-[50%]', filterIsVisible)
+		// resetButton.classList.toggle('w-0', !filterIsVisible)
+		// filterOpenButton.classList.toggle('w-[50%]',filterIsVisible)
+		// filterOpenButton.classList.toggle('w-[100%]', !filterIsVisible)
+		// console.log(resetButton)
+
+
+		//
+		//
+		// filterFooter.current?.classList.toggle('translate-y-[-30%]', !filterIsVisible)
 		showFilter(filterIsVisible)
-		buttonsContainer.current?.classList.add(...(filterIsVisible ? isVisible : isNotVisible))
-		buttonsContainer.current?.classList.remove(...(!filterIsVisible ? isVisible : isNotVisible))
-		// resetbutton.classList.toggle('',filterIsVisible)
-		resetbutton.classList.toggle('h-0', filterIsVisible)
-		resetbutton.classList.toggle('w-30', !filterIsVisible)
-		resetbutton.classList.toggle('hidden', !filterIsVisible)
 	}, [filterIsVisible])
 	return (
 		<>
 			<div
-				ref={buttonsContainer}
-				className='fixed flex justify-center items-center translate-x-[50%] right-[50%] z-999 bg-amber-700 min-h-14 min-w-40 transition-all! duration-400'
+				ref={filterFooter}
+				className='fixed flex bottom-0 box-border rounded-t-2xl   translate-x-[50%] right-[50%] z-999 bg-neutral-700  transition-all duration-500 ease-linear gap-0'
 			>
-				<button className={`${button} transition-all! duration-1000 bg-neutral-300`}>
-					<RotateCw className='mr-0.5' />
+				{/*  */}
+				<button className={`reset-button ${button}   bg-neutral-300`}>
+					<RotateCw size={20} className='mr-0.5' />
 					<p className=''>clear filters</p>
 				</button>
-				<button onClick={handleFilterVisible} className={`${button} bg-amber-500`}>
-					<Funnel />
+				{/*  */}
+				<button
+					onClick={handleFilterVisible}
+					className={`filter-open-button ${button}  bg-amber-500`}
+				>
+					<Funnel size={20} />
 					<p className='ml-0.5'>Filters</p>
 				</button>
+				{/*  */}
 			</div>
+			{/*  */}
+			{/* </div> */}
 		</>
 	)
 }

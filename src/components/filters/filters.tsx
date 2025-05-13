@@ -1,18 +1,11 @@
-import '../../index.css'
+import './filters.css'
 import { Funnel, RotateCw } from 'lucide-react'
 
 import { TFilterValue } from '../../types/types'
 import { FilterSection } from '../filter-section/filter-section'
 import { useEffect, useRef, useState } from 'react'
 import { getWindowWidthService } from '../../services/get-window-width/get-window-width.service'
-import {
-	desktopView,
-	filterFullScreenOff,
-	filterFullScreenOn,
-	hideMobileFilterWindow,
-	mobileView,
-	button,
-} from './filter-styles'
+import { desktopView, hideMobileFilterWindow, mobileView, button } from './filter.tailwind'
 import { FilterButtons } from '../filter-buttons/filter-buttons'
 
 interface Props {
@@ -25,42 +18,31 @@ export function Filters({ filters }: Props) {
 	const [isMobile, setIsMobile] = useState(false)
 	const [filterIsVisible, setFilterIsVisible] = useState(false)
 	const filterWindow = useRef<HTMLDivElement>(null)
-	// const filterOpenButton = useRef<HTMLDivElement>(null)
-
-	const changeView = () => {
-		const filterPanels = filterWindow.current?.lastChild as HTMLDivElement
-		filterWindow.current!.classList.add(...(isMobile ? mobileView : desktopView))
-		filterWindow.current!.classList.remove(...(!isMobile ? mobileView : desktopView))
-		filterWindow.current?.classList.toggle(hideMobileFilterWindow, isMobile)
-		// filterOpenButton.current?.classList.toggle('hidden', !isMobile)
-		// filterOpenButton.current?.classList.toggle('fixed', isMobile)
-		// filterOpenButton.current?.classList.toggle('flex', isMobile)
-		filterPanels.classList.toggle('overflow-scroll', isMobile)
-		filterPanels.classList.toggle('h-[90svh]', isMobile)
-	}
-
-	const buttonAnimaTions = () => {
-		// const resetButton = filterOpenButton.current?.firstChild as HTMLButtonElement
-		//
-		filterWindow.current!.classList.toggle(hideMobileFilterWindow, !filterIsVisible)
-	}
 
 	useEffect(() => {
-		buttonAnimaTions()
+		document.body.classList.toggle('overflow-hidden', filterIsVisible)
+
+		filterWindow.current!.classList.toggle(hideMobileFilterWindow, !filterIsVisible)
 	}, [filterIsVisible])
 	useEffect(() => {
-		changeView()
+		// changeView()
+		filterWindow.current!.classList.toggle(hideMobileFilterWindow, isMobile)
+		console.log('ismobile');
+		console.log(getWindowWidthService());
+		
 	}, [isMobile])
 	useEffect(() => {
 		setIsMobile(getWindowWidthService())
 	}, [])
 	return (
 		<>
+			{/* <div className=' bottom-0'> */}
 			<FilterButtons showFilter={(e: boolean) => setFilterIsVisible(e)} />
 
-			{/* */}
-			<div ref={filterWindow} className=''>
-				<header className='h-20 flex items-center justify-between'>
+			{/* </div> */}
+
+			<div ref={filterWindow} className={`${isMobile ? `${mobileView} ddd` : desktopView} `}>
+				<header className={` h-20 flex-shrink-0  flex items-center justify-between`}>
 					<h1 className='text-2xl'>Filters</h1>
 					<div className=''>
 						<button className='flex items-center outline-0'>
@@ -69,13 +51,14 @@ export function Filters({ filters }: Props) {
 						</button>
 					</div>
 				</header>
-				<div className=''>
-					<div className=' flex flex-col '>
-						{filters?.map(filterSection => (
-							<FilterSection key={filterSection.sectionName} list={filterSection} />
-						))}
-					</div>
+
+				<div className={` overflow-scroll  box-border pb-20 overflow-x-hidden scroll-m-100 `}>
+					{filters?.map(filterSection => (
+						<FilterSection key={filterSection.sectionName} list={filterSection} />
+					))}
 				</div>
+
+				<div className='w-full min-h-20'></div>
 			</div>
 		</>
 	)

@@ -32,9 +32,9 @@ export function FilterSection({ list }: filterSectionProps) {
 						</div>
 					)}
 
-					<ul className='grid max-[30rem]:grid-cols-1 max-[960px]:grid-cols-2 overflow-y-auto scrollbar max-h-80 min-w-0'>
+					<ul className='grid max-[30rem]:grid-cols-1 max-[900px]:grid-cols-2 overflow-y-auto scrollbar max-h-80 min-w-0'>
 						{filteredItems?.map((filter, id) => (
-							<li className='py-1 flex-1' key={`${filter}-${id}`}>
+							<li className='py-1 flex-1 overflow-x-hidden' key={`${filter}-${id}`}>
 								<CustomCheckbox  name={list?.sectionName!} htmlFor={filter} />
 							</li>
 						))}
