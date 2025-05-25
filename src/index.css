@@ -1,7 +1,7 @@
-@import "tailwindcss/utilities";
+
 
 body {
-	margin: 0;
+  margin: 0;
 }
 /* .header {
 	display: flex;
@@ -17,26 +17,23 @@ body {
 	justify-content: space-between;
 } */
 .border-top {
-	background-color: var(--color-gray-500);
+  background-color: var(--color-gray-500);
 }
 .scrollbar {
-	scrollbar-width: thin;
+  scrollbar-width: thin;
 }
 
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
-	/* background-color: var(--color-neutral-00); */
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-

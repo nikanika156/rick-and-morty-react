@@ -1,7 +1,36 @@
 @import "tailwindcss";
+/* @import "fluid-tailwind"; */
+/* @theme { */
+/* screen:{
+		
+		m-vw: 56rem;
+		mvw: 56rem
+	} */
+
+/* } */
+@theme {
+  --breakpoint-lg: 56.25rem;
+  --breakpoint-xl: 70rem;
+  --breakpoint-sm: 44rem;
+  --animate-gradient: gradient 2.5s linear infinite;
+  @keyframes gradient {
+    from {
+      background-position: 0 50%;
+    }
+   
+    
+    to {
+      background-position: -125% 50%;
+
+    }
+    /* 100%{
+      background-position: 0% 50%;
+
+    } */
+  }
+}
 #root {
   margin: 0 auto;
 
   /* text-align: center; */
 }
-

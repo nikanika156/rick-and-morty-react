@@ -1,36 +1,39 @@
-import { Link } from 'react-router-dom'
-import { Logo } from '../../../public/svg/logo'
+import { Logo } from "../../../public/svg/logo";
+import { ComponentLoad } from "../components-load/component-load";
 
 export function Header() {
-	return (
-		<>
-			<header className='h-20 flex items-center bg-neutral-900 box-border px-10'>
-				<ul className='flex items-center justify-end w-full gap-5 font-semibold text-lg text-neutral-500'>
-					<li className='mr-auto'>
-						<Link to={'/characters'}>
-							<h1 className='flex items-center gap-2 font-bold'>
-								<Logo size={45}/>
-								<p className='text-[26px]'>Home</p>
-							</h1>
-						</Link>
-					</li>
-					<li>
-						<Link to={'/characters'}>
-							<h1>Characters</h1>
-						</Link>
-					</li>
-					<li>
-						<Link to={'/episode'}>
-							<h1>Episodes</h1>
-						</Link>
-					</li>
-					<li>
-						<Link to={'/location'}>
-							<h1>Locations</h1>
-						</Link>
-					</li>
-				</ul>
-			</header>
-		</>
-	)
+  return (
+    <header className="w-full bg-neutral-900">
+      <div className="w-full h-20 px-5 max-w-320 m-auto">
+        <ul className="h-full flex w-full items-center justify-end gap-5">
+          <ComponentLoad
+            path="/"
+            text="Rick And Morty"
+            icon={<Logo size={45} />}
+            fontSize="text-2xl"
+            className="mr-auto"
+          />
+
+          <ComponentLoad
+            path="/character"
+            text="Character"
+            isMain={false}
+            fontSize="text-xl"
+          />
+          <ComponentLoad
+            path="/episode"
+            text="Episode"
+            isMain={false}
+            fontSize="text-xl"
+          />
+          <ComponentLoad
+            path="/location"
+            text="Location"
+            isMain={false}
+            fontSize="text-xl"
+          />
+        </ul>
+      </div>
+    </header>
+  );
 }

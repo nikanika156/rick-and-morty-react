@@ -1,33 +1,33 @@
-@import 'tailwindcss';
+
 
 .check-icon {
-	transition: 0.2s ease-out;
-	scale: 0;
-	/* transform: scale(); */
-	margin-top: 1px;
+  transition: 0.2s ease-out;
+  scale: 0;
+  /* transform: scale(); */
+  margin-top: 1px;
 }
 .old-checkbox:checked ~ .custom-checkbox {
-	background-color: var(--color-amber-500);
+  background-color: var(--color-amber-500);
 }
 .old-checkbox:checked ~ .custom-checkbox .check-icon {
-	/* transform: scale(100%); */
-	scale: 1;
+  /* transform: scale(100%); */
+  scale: 1;
 }
 .old-checkbox:hover:active ~ .custom-checkbox,
 .old-checkbox:active ~ .custom-checkbox {
-	background-color: var(--color-stone-700);
-	transform: scale(90%);
+  background-color: var(--color-stone-700);
+  transform: scale(90%);
 }
 .old-checkbox:checked ~ .custom-checkbox {
-	background-color: var(--color-amber-500);
+  background-color: var(--color-amber-500);
 }
 .old-checkbox:hover ~ .custom-checkbox {
-	background-color: var(--color-stone-600);
+  background-color: var(--color-stone-600);
 }
 .old-checkbox:checked:hover ~ .custom-checkbox {
-	background-color: var(--color-amber-600);
+  background-color: var(--color-amber-600);
 }
 .old-checkbox:checked:hover:active ~ .custom-checkbox,
 .old-checkbox:checked:active ~ .custom-checkbox {
-	background-color: var(--color-amber-700);
+  background-color: var(--color-amber-700);
 }

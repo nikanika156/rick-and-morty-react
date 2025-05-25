@@ -1,91 +1,116 @@
-import { useEffect, useState } from 'react'
-import { Cards } from '../../components/cards/cards'
-import { Filters } from '../../components/filters/filters'
-import { FiltersAndCards, ICards, IFilters, IFilterValue } from '../../types/types'
-import { GetData } from '../../services/get-data/get-data.service'
-import { DataContext } from '../../hooks/use-data-context'
-import { findClone } from '../../services/filters/find-clone'
-import { deleteClone } from '../../services/filters/delete-clone'
-import { PageBtns } from '../../components/page-btns/page-btns'
-import { HitsPerPage } from '../../components/hits-per-page/hits-per-page'
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Cards } from "../../components/cards/cards";
+import { Filters } from "../../components/filters/filters";
+import {
+  FiltersAndCards,
+  ICards,
+  IFilters,
+  IFilterValue,
+} from "../../types/types";
+import { GetData } from "../../services/get-data/get-data.service";
+import { DataContext } from "../../hooks/use-data-context";
+import { findClone } from "../../services/filters/find-clone";
+import { deleteClone } from "../../services/filters/delete-clone";
+import { PageBtns } from "../../components/page-btns/page-btns";
+import { HitsPerPage } from "../../components/hits-per-page/hits-per-page";
 // import { FiltersMobile } from '../../components/filters-mobileview/filters.mobile'
-import { getWindowWidthService } from '../../services/get-window-width/get-window-width.service'
+import { getWindowWidthService } from "../../services/get-window-width/get-window-width.service";
 
 //
 //
 export function CharactersPage() {
-	const [filtersAndCardArr, setFiltersAndCardArr] = useState<FiltersAndCards>({
-		filter: [],
-		cards: [],
-	})
-	const [filtersObj, setFiltersObj] = useState<IFilters>({
-		gender: [],
-		status: [],
-		origin: [],
-		species: [],
-	})
+  const [filtersAndCardArr, setFiltersAndCardArr] = useState<FiltersAndCards>({
+    filter: [],
+    cards: [],
+  });
+  const [filtersObj, setFiltersObj] = useState<IFilters>({
+    gender: [],
+    status: [],
+    origin: [],
+    species: [],
+  });
 
-	const [filteredCards, setFilteredCards] = useState<ICards[]>([])
-	const [hitsPerPage, setHitsPerPage] = useState(16)
-	const [page, setPage] = useState(1)
-	const checkFilters = Object.entries(filtersObj).some(x => x[1].length > 0)
-	const cards = checkFilters ? filteredCards : filtersAndCardArr.cards
-	const PageCount = Math.ceil(cards.length / hitsPerPage)
-	const paginated = cards.slice(hitsPerPage * page - hitsPerPage, hitsPerPage * page)
-	const handleFilterChange = (e: IFilterValue) => {
-		const key = e.filterTitle.toLowerCase() as keyof IFilters
-		if (findClone(filtersObj[key]!, e)) {
-			setFiltersObj(prev => ({
-				...prev,
-				[key]: [...deleteClone(prev[key], e.filterValue)],
-			}))
-		} else {
-			setFiltersObj(prev => ({ ...prev, [key]: [...prev[key], e.filterValue] }))
-		}
-	}
+  const [filteredCards, setFilteredCards] = useState<ICards[]>([]);
+  const [hitsPerPage, setHitsPerPage] = useState(16);
+  const [page, setPage] = useState(1);
+  const checkFilters = Object.entries(filtersObj).some((x) => x[1].length);
+  // const cards = checkFilters ? filteredCards : filtersAndCardArr;
+  const cards = filteredCards.length ? filteredCards : filtersAndCardArr.cards;
+  const PageCount = Math.ceil(cards.length / hitsPerPage);
+  // const paginated = cards.slice(
+  //   hitsPerPage * page - hitsPerPage,
+  //   hitsPerPage * page,
+  // );
+  const paginated = useMemo(() => {
+    return cards.slice(hitsPerPage * page - hitsPerPage, hitsPerPage * page);
+  }, [cards, hitsPerPage, page]);
 
-	const filterCards = () => {
-		const arr = filtersAndCardArr.cards.filter(card => {
-			const genderFilter = filtersObj.gender.length ? filtersObj.gender.includes(card.gender) : true
-			const statusFilter = filtersObj.status.length ? filtersObj.status.includes(card.status) : true
-			const speciesFilter = filtersObj.species.length
-				? filtersObj.species.includes(card.species)
-				: true
-			const originFilter = filtersObj.origin.length
-				? filtersObj.origin.includes(card.origin.name)
-				: true
+  const handleFilterChange = (e: IFilterValue) => {
+    const key = e.filterTitle.toLowerCase() as keyof IFilters;
+    if (filtersObj[key]!.includes(e.filterValue)) {
+      setFiltersObj((prev) => ({
+        ...prev,
+        [key]: [...deleteClone(prev[key], e.filterValue)],
+      }));
+    } else {
+      setFiltersObj((prev) => ({
+        ...prev,
+        [key]: [...prev[key], e.filterValue],
+      }));
+    }
+  };
+  const filterCards = () => {
+    const arr = filtersAndCardArr.cards.filter((card) => {
+      const genderFilter = filtersObj.gender.length
+        ? filtersObj.gender.includes(card.gender)
+        : true;
+      const statusFilter = filtersObj.status.length
+        ? filtersObj.status.includes(card.status)
+        : true;
+      const speciesFilter = filtersObj.species.length
+        ? filtersObj.species.includes(card.species)
+        : true;
+      const originFilter = filtersObj.origin.length
+        ? filtersObj.origin.includes(card.origin.name)
+        : true;
 
-			return speciesFilter && statusFilter && genderFilter && originFilter
-		})
-		setPage(1)
-		setFilteredCards(arr)
-		// window.scrollTo({ top: 0, behavior: 'smooth' })
-	}
-
-	useEffect(() => {
-		GetData().then(x => setFiltersAndCardArr(x))
-	}, [])
-	useEffect(() => {
-		filterCards()
-		// window.scrollTo({ top: 0, behavior: 'smooth' })
-	}, [filtersObj])
-	return (
-		<>
-			<div className=' flex'>
-				<DataContext.Provider value={{ sendData: handleFilterChange }}>
-					<Filters filters={filtersAndCardArr!.filter} />
-					{/* <FiltersMobile filters={filtersAndCardArr!.filter} /> */}
-				</DataContext.Provider>
-
-				<div className='character-main max-[900px]:mx-10 min-[900px]:mr-10 flex-1 flex flex-col items-center w-min pb-40'>
-					<header className='w-full h-20 flex items-center justify-end'>
-						<HitsPerPage sendData={(e: number) => setHitsPerPage(e)} />
-					</header>
-					<PageBtns lastPage={PageCount} page={page} sendData={(page: number) => setPage(page)} />
-					<Cards cards={paginated} />
-					{/* </div> */}
-				</div>
-			</div>
-		</>
-	)
+      return speciesFilter && statusFilter && genderFilter && originFilter;
+    });
+    setPage(1);
+    setFilteredCards(arr);
+  };
+  useEffect(() => {
+    GetData().then((x) => setFiltersAndCardArr(x));
+  }, []);
+  useEffect(() => {
+    console.log(cards);
+    // console.log(filterCards());
+  }, [cards]);
+  useEffect(() => {
+    filterCards();
+    // console.log(filtersObj);
+  }, [filtersObj]);
+  return (
+    <>
+      <div className="lg:-gap-0 flex gap-10">
+        <DataContext.Provider value={{ sendData: handleFilterChange }}>
+          <Filters filters={filtersAndCardArr!.filter} />
+        </DataContext.Provider>
+        <div className="character-main flex flex-1 flex-col items-center">
+          <header className="flex h-20 w-full items-center">
+            <h1 className="text-2xl font-semibold">Character</h1>
+            <div className="ml-auto">
+              <HitsPerPage sendData={(e: number) => setHitsPerPage(e)} />
+            </div>
+          </header>
+          <PageBtns
+            lastPage={PageCount}
+            page={page}
+            sendData={(page: number) => setPage(page)}
+          />
+          <Cards cards={paginated} />
+        </div>
+      </div>
+    </>
+  );
 }
