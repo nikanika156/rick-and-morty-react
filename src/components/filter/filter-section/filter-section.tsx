@@ -1,7 +1,7 @@
 import { TFilterValue } from "../../../types/types";
 import { CustomCheckbox } from "../../custom-checkbox/custom-checkbox";
 
-import { localSearch } from "../../../services/search/search.service";
+import { localSearch } from "../../../utility/search/search";
 import { Input } from "../../input/input";
 import { useState } from "react";
 
