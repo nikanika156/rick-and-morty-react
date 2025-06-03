@@ -83,7 +83,7 @@ export function CharactersPage() {
     GetData().then((x) => setFiltersAndCardArr(x));
   }, []);
   useEffect(() => {
-    console.log(cards);
+
     // console.log(filterCards());
   }, [cards]);
   useEffect(() => {
