@@ -7,14 +7,14 @@ import {
   IFilters,
   IFilterValue,
 } from "../../types/types";
-import { GetData } from "../../utility/get-data/get-data";
+import { GetData } from "../../utils/get-data/get-data";
 import { DataContext } from "../../hooks/use-data-context";
-import { findClone } from "../../utility/filters/find-clone";
-import { deleteClone } from "../../utility/filters/delete-clone";
+import { findClone } from "../../utils/filters/find-clone";
+import { deleteClone } from "../../utils/filters/delete-clone";
 import { PageBtns } from "../../components/page-btns/page-btns";
 import { HitsPerPage } from "../../components/hits-per-page/hits-per-page";
 // import { FiltersMobile } from '../../components/filters-mobileview/filters.mobile'
-import { getWindowWidthService } from "../../utility/get-window-width/get-window-width.service";
+import { getWindowWidthService } from "../../utils/get-window-width/get-window-width.service";
 
 //
 //

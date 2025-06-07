@@ -3,7 +3,7 @@ import { Funnel, RotateCw } from "lucide-react";
 import { TFilterValue } from "../../types/types";
 import { FilterSection } from "../filter/filter-section/filter-section";
 import { useEffect, useRef, useState } from "react";
-import { getWindowWidthService } from "../../utility/get-window-width/get-window-width.service";
+import { getWindowWidthService } from "../../utils/get-window-width/get-window-width.service";
 import {
   desktopView,
   hideMobileFilterWindow,
