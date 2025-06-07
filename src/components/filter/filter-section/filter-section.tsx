@@ -1,7 +1,7 @@
 import { TFilterValue } from "../../../types/types";
 import { CustomCheckbox } from "../../custom-checkbox/custom-checkbox";
 
-import { localSearch } from "../../../utility/search/search";
+import { localSearch } from "../../../utility/search/search.service";
 import { Input } from "../../input/input";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ interface filterSectionProps {
   list?: TFilterValue;
 }
 
-export function FilterSection({ list }: filterSectionProps) {
+export const FilterSection =  function FilterSection({ list }: filterSectionProps) {
   const [searchInput, setSearchInput] = useState("");
   const filteredItems = localSearch(searchInput, list?.filters);
   const isBigArray = list?.filters && list?.filters.length >= 15;

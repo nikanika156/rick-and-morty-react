@@ -14,7 +14,7 @@ import { deleteClone } from "../../utility/filters/delete-clone";
 import { PageBtns } from "../../components/page-btns/page-btns";
 import { HitsPerPage } from "../../components/hits-per-page/hits-per-page";
 // import { FiltersMobile } from '../../components/filters-mobileview/filters.mobile'
-import { getWindowWidthService } from "../../utility/get-window-width/get-window-width";
+import { getWindowWidthService } from "../../utility/get-window-width/get-window-width.service";
 
 //
 //
@@ -33,7 +33,7 @@ export function CharactersPage() {
   const [filteredCards, setFilteredCards] = useState<ICards[]>([]);
   const [hitsPerPage, setHitsPerPage] = useState(16);
   const [page, setPage] = useState(1);
-  const checkFilters = Object.entries(filtersObj).some((x) => x[1].length);
+  // const checkFilters = Object.entries(filtersObj).some((x) => x[1].length);
   // const cards = checkFilters ? filteredCards : filtersAndCardArr;
   const cards = filteredCards.length ? filteredCards : filtersAndCardArr.cards;
   const PageCount = Math.ceil(cards.length / hitsPerPage);
@@ -41,9 +41,10 @@ export function CharactersPage() {
   //   hitsPerPage * page - hitsPerPage,
   //   hitsPerPage * page,
   // );
-  const paginated = useMemo(() => {
-    return cards.slice(hitsPerPage * page - hitsPerPage, hitsPerPage * page);
-  }, [cards, hitsPerPage, page]);
+  const paginated = useMemo(
+    () => cards.slice(hitsPerPage * page - hitsPerPage, hitsPerPage * page),
+    [cards, hitsPerPage, page],
+  );
 
   const handleFilterChange = (e: IFilterValue) => {
     const key = e.filterTitle.toLowerCase() as keyof IFilters;
@@ -83,7 +84,6 @@ export function CharactersPage() {
     GetData().then((x) => setFiltersAndCardArr(x));
   }, []);
   useEffect(() => {
-
     // console.log(filterCards());
   }, [cards]);
   useEffect(() => {

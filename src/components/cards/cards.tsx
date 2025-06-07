@@ -3,6 +3,8 @@ import { ICards } from "../../types/types";
 import { list } from "./cards.tailwind";
 import { CardWithImage } from "../card/card-with-image/card-with-image";
 import { ProgressCircle } from "../progress-circle/progress-circle";
+import { CardWithImgSkeleton } from "../card/card-w-img-skeleton/card-w-img-skeleton";
+import React from "react";
 
 interface Props {
   cards: ICards[];
@@ -10,10 +12,11 @@ interface Props {
 
 export function Cards({ cards }: Props) {
   const [loadedCount, setLoadedCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-// set loading
+  const [loading, setLoading] = useState(false);
+
+  // set loading
   useEffect(() => {
-    if (cards.length && loadedCount >= cards.length) {
+    if (cards.length && Math.min(loadedCount, cards.length) == cards.length) {
       setTimeout(() => {
         setLoading(false);
       }, 250);
@@ -22,21 +25,72 @@ export function Cards({ cards }: Props) {
     }
   }, [loadedCount]);
   // Preload images
+  // useEffect(() => {
+  //   let cancelled = false;
+
+  //   setLoadedCount(0);
+  //   setIsLoaded(
+  //     cards.some((card) => {
+  //       const img = new Image();
+  //       img.src = card.image;
+  //       return img.complete;
+  //     }),
+  //   );
+  //   // if (!cancelled)
+  //   cards?.forEach((card) => {
+  //     const img = new Image();
+  //     img.src = card.image;
+  //     img.onload = () => {
+  //       setTimeout(() => {
+  //         if (!cancelled) {
+  //           setLoadedCount((prev) => prev + 1);
+  //         }
+  //       }, 200);
+  //     };
+  //   });
+
+  //   return () => {
+  //     cancelled = true;
+  //   };
+  // }, [cards]);
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
     setLoadedCount(0);
-    cards?.forEach((card) => {
+
+    const preloadImage = (src: string) =>
+      new Promise<void>((resolve) => {
+        const img = new Image();
+        img.src = src;
+
+        if (img.complete) {
+          resolve();
+        } else {
+          img.onload = () => resolve();
+        }
+      });
+
+    Promise.all(cards.map((card) => preloadImage(card.image))).then((x) => {
+      console.log(x);
+
+      if (!cancelled) {
+        setLoading(false);
+      }
+    });
+
+    cards.forEach((card) => {
       const img = new Image();
       img.src = card.image;
-
-      img.onload = () => {
-        if (!cancelled)
-          setTimeout(() => {
+      if (img.complete) {
+        setLoadedCount((prev) => prev + 1);
+      } else {
+        img.onload = () => {
+          if (!cancelled) {
             setLoadedCount((prev) => prev + 1);
-          }, 200);
-      };
+          }
+        };
+      }
     });
+
     return () => {
       cancelled = true;
     };
@@ -45,22 +99,19 @@ export function Cards({ cards }: Props) {
   return (
     <>
       <div className="w-full border-t-1 border-t-stone-500! py-10">
-        {loading && (
-          <div className="sticky top-1/2 z-9999 w-full translate-y-[-50%] bg-neutral-900">
-            <ProgressCircle value={loadedCount} max={cards.length} />
-            loading...
-          </div>
-        )}
         <ul className="grid max-lg:gap-x-5 max-lg:gap-y-5 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr] lg:gap-5 xl:grid-cols-[1fr_1fr_1fr_1fr]">
           {cards.map((card) => (
             <li key={card.id} className="flex">
-              <CardWithImage
-                name={card.name}
-                origin={card.origin.name}
-                species={card.species}
-                image={card.image}
-                loading={loading}
-              />
+              {loading ? (
+                <CardWithImgSkeleton />
+              ) : (
+                <CardWithImage
+                  name={card.name}
+                  origin={card.origin.name}
+                  species={card.species}
+                  image={card.image}
+                />
+              )}
             </li>
           ))}
         </ul>

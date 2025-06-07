@@ -3,7 +3,7 @@ import { Funnel, RotateCw } from "lucide-react";
 import { TFilterValue } from "../../types/types";
 import { FilterSection } from "../filter/filter-section/filter-section";
 import { useEffect, useRef, useState } from "react";
-import { getWindowWidthService } from "../../utility/get-window-width/get-window-width";
+import { getWindowWidthService } from "../../utility/get-window-width/get-window-width.service";
 import {
   desktopView,
   hideMobileFilterWindow,
@@ -11,11 +11,12 @@ import {
   button,
 } from "./filter.tailwind";
 import { FilterButtons } from "../filter/filter-buttons/filter-buttons";
+import React from "react";
 
 interface Props {
   filters: TFilterValue[];
 }
-export function Filters({ filters }: Props) {
+export const Filters = React.memo(function Filters({ filters }: Props) {
   window.addEventListener(
     "resize",
     () => (getWindowWidthService() ? setIsMobile(true) : setIsMobile(false)),
@@ -73,4 +74,4 @@ export function Filters({ filters }: Props) {
       </div>
     </>
   );
-}
+});

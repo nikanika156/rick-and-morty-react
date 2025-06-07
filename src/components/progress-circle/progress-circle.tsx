@@ -1,26 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import './loader.css'
 
-interface Props {
-  max: number;
-  value: number;
-}
-export function ProgressCircle({ max, value }: Props) {
+export function ProgressCircle() {
+
   const radius = 20;
   const circumference = 2 * Math.PI * radius;
-  const progress = value
-    ? circumference - (value / max) * circumference
-    : circumference;
-  useEffect(() => {
-    console.log(circumference + "---" + progress);
-    console.log();
-  }, [progress]);
+  // const progress = loaded
+  //   ? circumference - (loaded / total) * circumference
+  //   : circumference;
+  // useEffect(() => {
+  //   console.log(total);
+  // }, [total]);
+
+  
   return (
-    <div>
+    <div className=" h-20 w-20">
       <svg
         viewBox="0 0 50 50"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="relative h-15 w-15 rotate-90 fill-none stroke-current"
+        className="relative h-15 w-15  fill-none stroke-current animate-[spin_2s_infinite_linear] scale-150"
         xmlns="http://www.w3.org/2000/svg"
       >
         <circle
@@ -34,8 +33,8 @@ export function ProgressCircle({ max, value }: Props) {
           cy="25"
           r={radius}
           strokeDasharray={circumference}
-          strokeDashoffset={progress}
-          className={`stroke-amber-500 stroke-[3] transition-[stroke-dashoffset] ease-linear`}
+          strokeDashoffset={circumference/2*1.5}
+          className={`animate-dash  stroke-amber-500 stroke-[3]  ${`transition-[stroke-dashoffset]`} ease-linear`}
           pathLength={circumference}
         />
       </svg>
