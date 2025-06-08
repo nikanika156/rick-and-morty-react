@@ -8,7 +8,7 @@ import {
   IFilterValue,
 } from "../../types/types";
 import { GetData } from "../../utils/get-data/get-data";
-import { DataContext } from "../../hooks/use-data-context";
+import { DataContext } from "../../hooks/context/use-data-context";
 import { findClone } from "../../utils/filters/find-clone";
 import { deleteClone } from "../../utils/filters/delete-clone";
 import { PageBtns } from "../../components/page-btns/page-btns";

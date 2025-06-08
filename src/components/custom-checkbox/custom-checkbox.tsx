@@ -1,7 +1,6 @@
 import { Check } from "lucide-react";
 import "./custom-checkbox.css";
-
-import { useDataContext } from "../../hooks/use-data-context";
+import { useFilterContext } from "../../hooks/context/use-data-context";
 import { ICards, IFilterValue } from "../../types/types";
 import React from "react";
 
@@ -10,11 +9,8 @@ interface customCheckboxProps {
   htmlFor: string;
 }
 
-export const CustomCheckbox = React.memo(function CustomCheckbox({
-  name,
-  htmlFor,
-}: customCheckboxProps) {
-  const { sendData } = useDataContext();
+export function CustomCheckbox({ name, htmlFor }: customCheckboxProps) {
+  const { sendData } = useFilterContext();
   const inputOnChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const forSend: IFilterValue = {
       filterTitle: target.name.toLowerCase() as keyof ICards,
@@ -45,4 +41,4 @@ export const CustomCheckbox = React.memo(function CustomCheckbox({
       </label>
     </>
   );
-});
+}

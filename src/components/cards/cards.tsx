@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ICards } from "../../types/types";
 import { list } from "./cards.tailwind";
 import { CardWithImage } from "../card/card-with-image/card-with-image";
@@ -11,86 +11,50 @@ interface Props {
 }
 
 export function Cards({ cards }: Props) {
-  const [loadedCount, setLoadedCount] = useState(0);
-  const [loading, setLoading] = useState(false);
+  // const [loadedCount, setLoadedCount] = useState(0);
+  // const loadedCount = useRef(0);
+  let loadedCount = 0;
+  // const [loading, setLoading] = useState(false);
+  const loading = useRef(true);
 
   // set loading
   useEffect(() => {
     if (cards.length && Math.min(loadedCount, cards.length) == cards.length) {
       setTimeout(() => {
-        setLoading(false);
+        loading.current = false;
+        // setLoading(false);
       }, 250);
     } else {
-      setLoading(true);
+      loading.current = true;
+      // setLoading(true);
     }
+    console.log(loadedCount);
   }, [loadedCount]);
+  //
   // Preload images
-  // useEffect(() => {
-  //   let cancelled = false;
+  //
 
-  //   setLoadedCount(0);
-  //   setIsLoaded(
-  //     cards.some((card) => {
-  //       const img = new Image();
-  //       img.src = card.image;
-  //       return img.complete;
-  //     }),
-  //   );
-  //   // if (!cancelled)
-  //   cards?.forEach((card) => {
-  //     const img = new Image();
-  //     img.src = card.image;
-  //     img.onload = () => {
-  //       setTimeout(() => {
-  //         if (!cancelled) {
-  //           setLoadedCount((prev) => prev + 1);
-  //         }
-  //       }, 200);
-  //     };
-  //   });
-
-  //   return () => {
-  //     cancelled = true;
-  //   };
-  // }, [cards]);
   useEffect(() => {
     let cancelled = false;
-    setLoadedCount(0);
+    // setLoadedCount(0);
+    loadedCount = 0;
 
-    const preloadImage = (src: string) =>
-      new Promise<void>((resolve) => {
-        const img = new Image();
-        img.src = src;
+    cards.map(({ image }) => {
+      const Img = new Image();
+      Img.src = image;
 
-        if (img.complete) {
-          resolve();
-        } else {
-          img.onload = () => resolve();
-        }
-      });
-
-    Promise.all(cards.map((card) => preloadImage(card.image))).then((x) => {
-      console.log(x);
-
-      if (!cancelled) {
-        setLoading(false);
-      }
-    });
-
-    cards.forEach((card) => {
-      const img = new Image();
-      img.src = card.image;
-      if (img.complete) {
-        setLoadedCount((prev) => prev + 1);
+      if (Img.complete) {
+        console.log(image);
       } else {
-        img.onload = () => {
-          if (!cancelled) {
-            setLoadedCount((prev) => prev + 1);
-          }
+        Img.onload = () => {
+          loadedCount += 1;
         };
       }
     });
 
+    //
+
+    //
     return () => {
       cancelled = true;
     };
