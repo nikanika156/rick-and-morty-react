@@ -1,63 +1,71 @@
 import { useEffect, useRef, useState } from "react";
 import { ICards } from "../../types/types";
-import { list } from "./cards.tailwind";
+
 import { CardWithImage } from "../card/card-with-image/card-with-image";
-import { ProgressCircle } from "../progress-circle/progress-circle";
+
 import { CardWithImgSkeleton } from "../card/card-w-img-skeleton/card-w-img-skeleton";
-import React from "react";
 
 interface Props {
   cards: ICards[];
 }
 
 export function Cards({ cards }: Props) {
-  // const [loadedCount, setLoadedCount] = useState(0);
-  // const loadedCount = useRef(0);
-  let loadedCount = 0;
-  // const [loading, setLoading] = useState(false);
-  const loading = useRef(true);
-
+  const [loadedCount, setLoadedCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [inCache, setInCache] = useState(false);
+  const cancelled = useRef(false);
   // set loading
-  useEffect(() => {
-    if (cards.length && Math.min(loadedCount, cards.length) == cards.length) {
-      setTimeout(() => {
-        loading.current = false;
-        // setLoading(false);
-      }, 250);
-    } else {
-      loading.current = true;
-      // setLoading(true);
-    }
-    console.log(loadedCount);
-  }, [loadedCount]);
+  // useEffect(() => {
+  //   if (cards.length && Math.min(loadedCount, cards.length) == cards.length) {
+  //     setTimeout(() => {
+  //       // loading.current = false;
+  //       setLoading(false);
+  //     }, 250);
+  //   } else {
+  //     // loading.current = true;
+  //     setLoading(true);
+  //   }
+  //   console.log(loadedCount);
+  // }, [loadedCount]);
   //
   // Preload images
   //
-
-  useEffect(() => {
-    let cancelled = false;
-    // setLoadedCount(0);
-    loadedCount = 0;
+  const preloadImage = async () => {
+    let cached = false;
+    let loaded = false;
+    let countInCache = 0;
+    setLoadedCount(0);
+    setLoading(true);
 
     cards.map(({ image }) => {
-      const Img = new Image();
-      Img.src = image;
+      const xml = new XMLHttpRequest();
+      xml.open("GET", image);
+      xml.responseType = "blob";
 
-      if (Img.complete) {
-        console.log(image);
-      } else {
-        Img.onload = () => {
-          loadedCount += 1;
-        };
+      // if (xml.) {
+      xml.onloadend = (x) => {
+        console.log((countInCache += 1));
+      };
+      xml.onload = function(e){
+        console.log(e);
+        
       }
+      // } else {
+      //   xml.onload = () => {
+      //     setLoadedCount((prev) => prev + 1);
+      //   };
+      // }
     });
 
-    //
-
-    //
-    return () => {
-      cancelled = true;
+    return {
+      cached: cached,
+      loaded: loaded,
     };
+  };
+  useEffect(() => {
+    preloadImage().then((x) => {
+      console.log(x);
+    });
   }, [cards]);
 
   return (

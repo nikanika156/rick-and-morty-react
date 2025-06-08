@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Cards } from "../../components/cards/cards";
 import { Filters } from "../../components/filters/filters";
 import {
@@ -9,12 +9,12 @@ import {
 } from "../../types/types";
 import { GetData } from "../../utils/get-data/get-data";
 import { DataContext } from "../../hooks/context/use-data-context";
-import { findClone } from "../../utils/filters/find-clone";
+
 import { deleteClone } from "../../utils/filters/delete-clone";
 import { PageBtns } from "../../components/page-btns/page-btns";
 import { HitsPerPage } from "../../components/hits-per-page/hits-per-page";
 // import { FiltersMobile } from '../../components/filters-mobileview/filters.mobile'
-import { getWindowWidthService } from "../../utils/get-window-width/get-window-width.service";
+
 
 //
 //

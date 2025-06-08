@@ -1,4 +1,4 @@
-import { Funnel, RotateCw } from "lucide-react";
+import { RotateCw } from "lucide-react";
 
 import { TFilterValue } from "../../types/types";
 import { FilterSection } from "../filter/filter-section/filter-section";
@@ -8,7 +8,6 @@ import {
   desktopView,
   hideMobileFilterWindow,
   mobileView,
-  button,
 } from "./filter.tailwind";
 import { FilterButtons } from "../filter/filter-buttons/filter-buttons";
 import React from "react";

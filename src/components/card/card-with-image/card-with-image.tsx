@@ -1,5 +1,5 @@
 import React from "react";
-import { CardWithImgSkeleton } from "../card-w-img-skeleton/card-w-img-skeleton";
+
 
 interface Props {
   name: string;

@@ -8,33 +8,15 @@ export function FilterButtons({ showFilter }: Props) {
   const filterFooter = useRef<HTMLDivElement>(null);
   const [filterIsVisible, setFilterIsVisible] = useState(false);
 
-  // const filterOpenButton = useRef(null)
+  // const default filterOpenButton = useRef(null)
   const button =
     "flex items-center justify-center transition-all duration-500 rounded-xl outline-0 min-h-[55px] overflow-hidden min-w-30";
 
   const handleFilterVisible = () => {
     setFilterIsVisible((prev) => !prev);
   };
-  const isVisible = ["w-full", "px-3", "p-3", "gap-3"];
-  // const isNotVisible = ['h-10', 'bottom-[5%]', 'w-[150px]', 'rounded-xl']
-  useEffect(() => {}, []);
+
   useEffect(() => {
-    const resetButton = filterFooter.current?.firstChild as HTMLButtonElement;
-    const filterOpenButton = filterFooter.current
-      ?.lastChild as HTMLButtonElement;
-    // isVisible.forEach(x => filterFooter.current?.classList.toggle(x, filterIsVisible))
-    // filterFooter.current?.classList.toggle('w-full', filterIsVisible)
-    // filterFooter.current?.classList.toggle('w-[130px]', !filterIsVisible)
-
-    // resetButton.classList.toggle('w-[50%]', filterIsVisible)
-    // resetButton.classList.toggle('w-0', !filterIsVisible)
-    // filterOpenButton.classList.toggle('w-[50%]',filterIsVisible)
-    // filterOpenButton.classList.toggle('w-[100%]', !filterIsVisible)
-    // console.log(resetButton)
-
-    //
-    //
-    // filterFooter.current?.classList.toggle('translate-y-[-30%]', !filterIsVisible)
     showFilter(filterIsVisible);
   }, [filterIsVisible]);
   return (
