@@ -1,4 +1,4 @@
-export const getWindowWidthService = () => {
+export const getWindowWidth = () => {
 	if (window.innerWidth < 900) {
 		return true
 	} else {

@@ -15,7 +15,6 @@ import { PageBtns } from "../../components/page-btns/page-btns";
 import { HitsPerPage } from "../../components/hits-per-page/hits-per-page";
 // import { FiltersMobile } from '../../components/filters-mobileview/filters.mobile'
 
-
 //
 //
 export function CharactersPage() {
@@ -114,3 +113,4 @@ export function CharactersPage() {
     </>
   );
 }
+

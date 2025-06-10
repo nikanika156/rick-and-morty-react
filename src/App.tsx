@@ -11,10 +11,10 @@ export function App() {
           <Header />
           <div className="max-w-[1280px] m-auto px-5">
             <Routes>
-              <Route path="/home" Component={Home} />
-              <Route path="/" Component={CharactersPage} />
-              {/* <Route path='/episode' Component={CharactersPage} /> */}
-              {/* <Route path='/location' Component={CharactersPage} /> */}
+              <Route path="/" Component={Home} />
+              <Route path="/character" Component={CharactersPage} />
+              <Route path='/episode' Component={CharactersPage} />
+              <Route path='/location' Component={CharactersPage} />
             </Routes>
           </div>
         </BrowserRouter>

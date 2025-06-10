@@ -41,5 +41,6 @@ export async function GetData() {
 		createFilter('Origin', [...new Set(results.map(x => x.origin.name))]),
 	]
 
+
 	return { filter: filters, cards: results }
 }

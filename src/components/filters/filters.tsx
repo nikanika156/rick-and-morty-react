@@ -3,7 +3,7 @@ import { RotateCw } from "lucide-react";
 import { TFilterValue } from "../../types/types";
 import { FilterSection } from "../filter/filter-section/filter-section";
 import { useEffect, useRef, useState } from "react";
-import { getWindowWidthService } from "../../utils/get-window-width/get-window-width.service";
+import { getWindowWidth } from "../../utils/get-window-width/get-window-width";
 import {
   desktopView,
   hideMobileFilterWindow,
@@ -18,7 +18,7 @@ interface Props {
 export const Filters = React.memo(function Filters({ filters }: Props) {
   window.addEventListener(
     "resize",
-    () => (getWindowWidthService() ? setIsMobile(true) : setIsMobile(false)),
+    () => (getWindowWidth() ? setIsMobile(true) : setIsMobile(false)),
     // window.removeEventListener('resize',()=>{})
   );
   const [isMobile, setIsMobile] = useState(false);
@@ -37,7 +37,7 @@ export const Filters = React.memo(function Filters({ filters }: Props) {
     filterWindow.current!.classList.toggle(hideMobileFilterWindow, isMobile);
   }, [isMobile]);
   useEffect(() => {
-    setIsMobile(getWindowWidthService());
+    setIsMobile(getWindowWidth());
   }, []);
   return (
     <>
